@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+    <class name="com.moskalenkov.models.Film" table="films">
+        <meta attribute="class-description">
+            This class contains the user detail.
+        </meta>
+        <id name="id" type="int" column="uid">
+            <generator class="identity"/>
+        </id>
+        <property name="name" column="name" type="string"/>
+        <property name="rating" column="rating" type="int"/>
+        <set name="comments" table="comments" lazy="false" inverse="true" cascade="all">
+            <key column="film_id" not-null="true"/>
+            <one-to-many class="com.moskalenkov.models.Comment"/>
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+         version="2.4">
+
+    <display-name>FilmBase</display-name>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:spring-context.xml
+            classpath:spring-security.xml
+        </param-value>
+    </context-param>
+    <filter>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <servlet>
+        <servlet-name>appServlet</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath:spring-context.xml
+                classpath:spring-security.xml
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>appServlet</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+
+
+    <servlet>
+        <servlet-name>ClinicServlet</servlet-name>
+        <servlet-class>com.moskalenkov.servlets.FilmsBaseServlets</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>ClinicServlet</servlet-name>
+        <url-pattern>/test</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilmViewServlet</servlet-name>
+        <servlet-class>com.moskalenkov.servlets.FilmViewServlets</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FilmViewServlet</servlet-name>
+        <url-pattern>/films/view</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilmCreateServlet</servlet-name>
+        <servlet-class>com.moskalenkov.servlets.FilmCreateServlets</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FilmCreateServlet</servlet-name>
+        <url-pattern>/films/create</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilmEditServlet</servlet-name>
+        <servlet-class>com.moskalenkov.servlets.FilmEditServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FilmEditServlet</servlet-name>
+        <url-pattern>/films/edit</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>FilmDeleteServlet</servlet-name>
+        <servlet-class>com.moskalenkov.servlets.FilmDeleteServlet</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>FilmDeleteServlet</servlet-name>
+        <url-pattern>/films/delete</url-pattern>
+    </servlet-mapping>
+
+
+</web-app>
